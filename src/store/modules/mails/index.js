@@ -4,11 +4,13 @@ import { objToQueryString } from "../../helpers";
 const state = {
   mails: [],
   pagination: {},
+  singleMail: null,
 };
 
 const getters = {
   get: (state) => state.mails,
   pagination: (state) => state.pagination,
+  getSingle: (state) => state.singleMail,
 };
 
 const mutations = {
@@ -17,6 +19,9 @@ const mutations = {
   },
   setPagination(state, filters) {
     state.pagination = filters;
+  },
+  setSingleMail(state, paylaod) {
+    state.singleMail = paylaod;
   },
 };
 
@@ -48,6 +53,13 @@ const actions = {
         return response;
       })
       .catch(() => {});
+  },
+  fetchSingle(context, id = null) {
+    const url = `v1/email/${id}`;
+    return api_service.send(url, "get").then((response) => {
+      context.commit("setSingleMail", response.data.data);
+      return response;
+    });
   },
 };
 

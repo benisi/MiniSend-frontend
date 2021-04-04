@@ -37,11 +37,6 @@
             {{ item.subject }}
           </router-link>
         </template>
-        <template v-slot:[`item.email`]="{ item }">
-          <router-link :to="`/mails/${item.email}`">
-            {{ item.email }}
-          </router-link>
-        </template>
       </v-data-table>
     </v-card>
   </div>
@@ -55,6 +50,7 @@ export default {
       options: {},
       loading: false,
       search: "",
+      recipient: "",
       headers: [
         { text: "Subject", value: "subject", sortable: false },
         {
@@ -70,13 +66,20 @@ export default {
       breadcrumbs: [
         {
           text: "Mails",
+          disabled: false,
+          href: "/mails",
+        },
+        {
+          text: "view",
           disabled: true,
-          href: "",
+          href: "/mails",
         },
       ],
     };
   },
   created() {
+    this.recipient = this.$route.params.recipient;
+    this.breadcrumbs[1].text = this.recipient;
     this.fetchMails();
   },
   computed: {
@@ -98,6 +101,11 @@ export default {
   },
   methods: {
     fetchMails(filters = {}) {
+      if (!filters.filters) {
+        filters.filters = {};
+      }
+
+      filters.filters.recipient_email = this.recipient;
       this.loading = true;
       this.$store
         .dispatch("mails/fetchList", filters)
