@@ -47,18 +47,6 @@
           </v-list-item>
           <div v-if="showActions" class="show-actions">
             <v-list class="p-0">
-              <v-list-item
-                class="user-profile-dropdown"
-                to="/profile"
-                @click="showActions = !showActions"
-              >
-                <v-list-item-avatar class="dropdown-icon">
-                  <font-awesome-icon icon="user-alt"></font-awesome-icon>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <span>View Profile</span>
-                </v-list-item-content>
-              </v-list-item>
               <v-list-item class="user-profile-dropdown" @click="logout">
                 <v-list-item-avatar class="dropdown-icon">
                   <font-awesome-icon icon="power-off"></font-awesome-icon>

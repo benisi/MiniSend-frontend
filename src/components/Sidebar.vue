@@ -61,10 +61,7 @@
                   class="menu-list-item group"
                   :class="highlightTitle[item.title] ? 'gin-bg' : ''"
                 >
-                  <template
-                    v-slot:activator
-                    class="menu-list-item"
-                  >
+                  <template v-slot:activator class="menu-list-item">
                     <v-list-item
                       class="item-title"
                       v-model="item.active"
@@ -74,15 +71,17 @@
                     >
                       <v-list-item-content>
                         <v-list-item-title>
-                          <span class="menu-icon">
-                            <font-awesome-icon
-                              class
-                              :icon="item.icon"
-                            ></font-awesome-icon>
-                          </span>
-                          <span class="item-title">
-                            {{ item.title }}
-                          </span>
+                          <router-link :to="item.path">
+                            <span class="menu-icon">
+                              <font-awesome-icon
+                                class
+                                :icon="item.icon"
+                              ></font-awesome-icon>
+                            </span>
+                            <span class="item-title">
+                              {{ item.title }}
+                            </span>
+                          </router-link>
                         </v-list-item-title>
                       </v-list-item-content>
                     </v-list-item>
@@ -222,18 +221,21 @@ export default {
         {
           icon: "suitcase",
           title: "Batches",
+          path: "/batches",
           exact: true,
           showInSidebar: true,
         },
         {
           icon: "layer-group",
           title: "Mails",
+          path: "/mails",
           exact: true,
           showInSidebar: true,
         },
         {
           icon: "money-check-alt",
           title: "token",
+          path: "/token",
           exact: true,
           showInSidebar: true,
         },
