@@ -6,6 +6,9 @@ import Dashboard from "../views/Dashboard.vue";
 import MailList from "../views/Mail/List.vue";
 import ViewMail from "../views/Mail/View.vue";
 import RecipientMails from "../views/Mail/RecipientEmails.vue";
+import BatchList from "../views/Mail/BatchList.vue";
+import BatchMail from "../views/Mail/BatchMail.vue";
+import TokenList from "../views/Token/index.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +42,21 @@ const routes = [
     path: "/mails/:recipient",
     name: "RecipientMails",
     component: RecipientMails,
+  },
+  {
+    path: "/batches",
+    name: "Batch",
+    component: BatchList,
+  },
+  {
+    path: "/batches/:batchId",
+    name: "Batch",
+    component: BatchMail,
+  },
+  {
+    path: "/token",
+    name: "Token",
+    component: TokenList,
   },
 ];
 
