@@ -9,9 +9,6 @@ yarn install
 VUE_APP_API_HOST= // example: http://localhost:8000/api
 PORT= //example: 8001 (optional)
 
-yarn serve
-```
-
 ### Compiles and hot-reloads for development
 ```
 yarn serve
