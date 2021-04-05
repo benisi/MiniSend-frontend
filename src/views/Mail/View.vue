@@ -27,14 +27,20 @@
         v-for="attachment in attachmentData"
         :key="attachment.filename"
         class="ml-4 mt-4 px-4 py-4 attachment"
+        @click="downloadBase64Data(attachment.content, attachment.filename)"
       >
-        <font-awesome-icon
-            icon="paperclip"
-            class="mr-4"
-          ></font-awesome-icon>
-        <a :href="`data:${attachment.content}`" target="_blank">{{
-          attachment.filename
-        }}</a>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <span v-bind="attrs" v-on="on">
+              <font-awesome-icon
+                icon="paperclip"
+                class="mr-4"
+              ></font-awesome-icon>
+              {{ attachment.filename }}
+            </span>
+          </template>
+          <span>click to download</span>
+        </v-tooltip>
       </span>
     </div>
     <v-progress-circular
@@ -93,10 +99,50 @@ export default {
       return null;
     },
   },
-  methods: {},
+  methods: {
+    downloadBase64Data(content, filename) {
+      const signatures = {
+        JVBERi0: "application/pdf",
+        R0lGODdh: "image/gif",
+        R0lGODlh: "image/gif",
+        iVBORw0KGgo: "image/png",
+      };
+
+      let selectedSignature = null;
+
+      for (let signature in signatures) {
+        if (content.indexOf(signature) === 0) {
+          selectedSignature = signatures[signature];
+        }
+      }
+
+      if (!selectedSignature) {
+        this.$notify({
+          group: "notification",
+          type: "info",
+          text: "We don't currently support downloading this file type",
+        });
+
+        return;
+      }
+      const base64URL = `data:${selectedSignature};base64,${content}`;
+      const element = document.createElement("a");
+      element.setAttribute("href", base64URL);
+      element.setAttribute("download", filename);
+
+      element.style.display = "none";
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
+    },
+  },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
+@import "@/styles/_variables.scss";
+
 .loader {
   position: absolute;
   left: 50%;
@@ -111,5 +157,7 @@ export default {
 
 .attachment {
   display: inline-block;
+  cursor: pointer;
+  color: $mariner2;
 }
 </style>
