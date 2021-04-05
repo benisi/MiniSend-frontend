@@ -4,6 +4,13 @@
 ```
 yarn install
 ```
+### create a .env file in the root directory and add the env variables below
+```
+VUE_APP_API_HOST= // example: http://localhost:8000/api
+PORT= //example: 8001 (optional)
+
+yarn serve
+```
 
 ### Compiles and hot-reloads for development
 ```
