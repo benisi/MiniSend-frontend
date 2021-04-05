@@ -92,6 +92,7 @@ export default {
         });
 
         if (response && response.data) {
+          eventBus.$emit("hide-loader");
           if (response.data.data.token) {
             this.$notify({
               group: "notification",

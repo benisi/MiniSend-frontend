@@ -56,12 +56,12 @@ export default {
       return {
         right: {
           text: "Sent",
-          value: (this.mail && this.mail.sent) || 0,
+          value: (this.mail && (this.mail.sent || 0)) ,
           color: "icon-green",
         },
         left: {
           text: "failed",
-          value: (this.mail && this.mail.failed) || 0,
+          value: (this.mail && (this.mail.failed || 0)),
           color: "icon-red",
         },
       };
