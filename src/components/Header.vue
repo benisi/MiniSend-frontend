@@ -10,7 +10,7 @@
       <v-spacer></v-spacer>
       <div class="hide-on-desktop">
         <router-link to="/">
-          <img class="img-fluid mobile-logo" src="" alt="logo" to="/" />
+          <img class="img-fluid mobile-logo" src="@/assets/text-logo.png" alt="logo" to="/" />
         </router-link>
       </div>
 
@@ -25,7 +25,7 @@
                 </span>
               </div>
             </v-list-item-avatar>
-            <v-list-item-content class="hide-on-mobile">
+            <v-list-item-content class="hide-on-mobile mr-2">
               <div class="nav-link text-primary hide-on-mobile">
                 <v-list-item-title>
                   <span class="full-name">

@@ -4,12 +4,7 @@
       <div class="col-md-4 offset-md-4">
         <v-row>
           <v-col cols="12">
-            <img src="" class="col-6 offset-3" />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
-            <v-card class="login py-4">
+            <v-card class="login py-8">
               <v-row>
                 <v-col cols="10" offset="1">
                   <v-form
@@ -41,9 +36,7 @@
                   </v-form>
                 </v-col>
                 <v-col cols="10" offset="1" class="forgot-password">
-                  <router-link to="/forgot-password"
-                    >Forgot Password</router-link
-                  >
+                  <router-link to="/register">Register</router-link>
                 </v-col>
               </v-row>
             </v-card>
@@ -138,7 +131,7 @@ export default {
 }
 
 .login-form {
-  margin-top: 20vh;
+  margin-top: 15vh;
   @media screen and (max-width: 600px) {
     margin-top: 5vh;
   }
@@ -148,7 +141,6 @@ export default {
   text-align: center;
 
   a {
-    color: $vida-loca;
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;

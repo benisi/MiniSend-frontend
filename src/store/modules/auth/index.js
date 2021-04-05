@@ -57,6 +57,7 @@ const actions = {
   },
   logout(context) {
     const currentRoute = router.currentRoute.path;
+    eventBus.$emit("user-before-logout", context);
     router.push(`/login?redirect=${currentRoute}`);
   },
 };

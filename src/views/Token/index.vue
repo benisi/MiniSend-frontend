@@ -2,10 +2,13 @@
   <div>
     <v-breadcrumbs :items="breadcrumbs" divider="/"></v-breadcrumbs>
     <v-card>
-      <v-row class="table-header pr-3 m-0 mx-2 my-2">
+      <v-row class="table-header pr-3 pt-4 m-0 mx-2 my-2">
         <v-col cols="12">
           <h3>Create an api token</h3>
-          <p>This token is used to make request to our mail api</p>
+          <v-alert class="mt-4" dense outlined text type="info">
+            You can use any of the generated token to make api calls to our send
+            mail endpoint, add it to the authorization header as a bearer token
+          </v-alert>
           <v-text-field label="Enter token name" v-model="name"></v-text-field>
           <v-btn :disabled="!name" @click="createToken"> Create token </v-btn>
         </v-col>
@@ -20,8 +23,12 @@
         :loading="loading"
       >
         <template v-slot:[`item.action`]="{ item }">
-          <v-btn @click="openDeleteTokenDialog(item.id)">Remove</v-btn>
-          <v-btn class="ml-4" @click="copyToken(item.id)">Copy</v-btn>
+          <v-btn small color="error" @click="openDeleteTokenDialog(item.id)"
+            >Remove</v-btn
+          >
+          <v-btn small color="primary" class="ml-4" @click="copyToken(item.id)"
+            >Copy</v-btn
+          >
         </template>
         <template v-slot:[`item.token`]="{ item }">
           <input
@@ -57,8 +64,8 @@ export default {
       name: "",
       tokenToDeleteId: null,
       headers: [
-        { text: "name", value: "name" },
-        { text: "token", value: "token" },
+        { text: "Name", value: "name" },
+        { text: "Token", value: "token" },
         { text: "", value: "action" },
       ],
       breadcrumbs: [

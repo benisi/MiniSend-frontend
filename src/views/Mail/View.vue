@@ -4,9 +4,12 @@
     <v-card class="mx-auto px-8 py-4" v-if="!loading">
       <v-card-text>
         <p class="display-1 text--primary">{{ mail.subject }}</p>
-        <p>from: {{ mail.sender_email }}&#60;{{ mail.sender_name }}&#62;</p>
-        <p>to: {{ mail.email }}&#60;{{ mail.name }}&#62;</p>
-        <p>date: {{ mail.created_at }}</p>
+        <p class="faint  my-0">
+          From: {{ mail.sender_email }}&#60;{{ mail.sender_name }}&#62;
+        </p>
+        <p class="faint my-0">To: {{ mail.email }}&#60;{{ mail.name }}&#62;</p>
+        <p class="faint  my-0 mb-4">Date: {{ mail.created_at | dateTimeFilter }}</p>
+        <hr />
         <div class="text--primary mt-8" v-if="mail.text">
           {{ mail.text }}
         </div>
@@ -78,5 +81,8 @@ export default {
   z-index: 1000;
   height: 31px;
   width: 31px;
+}
+.faint {
+  color: rgb(0 0 0 / 50%);
 }
 </style>

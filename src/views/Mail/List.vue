@@ -23,6 +23,7 @@
       <v-data-table
         :items="mails"
         :headers="headers"
+        class="elevation-1"
         :items-per-page="50"
         :options.sync="options"
         :server-items-length="pagination.total"
@@ -41,6 +42,12 @@
           <router-link :to="`/mails/${item.email}`">
             {{ item.email }}
           </router-link>
+        </template>
+        <template v-slot:[`item.created_at`]="{ item }">
+          {{ item.created_at | dateTimeFilter }}
+        </template>
+        <template v-slot:[`item.status`]="{ item }">
+          <v-chip small :class="item.status">{{ item.status }}</v-chip>
         </template>
       </v-data-table>
     </v-card>

@@ -34,6 +34,12 @@
             view mails on this batch
           </router-link>
         </template>
+        <template v-slot:[`item.created_at`]="{ item }">
+          {{ item.created_at | dateTimeFilter }}
+        </template>
+        <template v-slot:[`item.status`]="{ item }">
+          <v-chip small :class="item.status">{{ item.status }}</v-chip>
+        </template>
       </v-data-table>
     </v-card>
   </div>

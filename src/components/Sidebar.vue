@@ -7,11 +7,15 @@
       class="mx-0 px-0"
     >
       <v-row
-        class="logo m-0 center-ver hide-on-mobile hide-on-small-screens hide-on-medium-screens"
+        class="logo m-0 center-ver hide-on-mobile mt-2 hide-on-small-screens hide-on-medium-screens"
       >
         <v-col cols="10" class="px-0">
-          <router-link to="/">
-            <img class="img-fluid logo-img" src="" alt="logo" />
+          <router-link to="/dashboard">
+            <img
+              class="img-fluid logo-img ml-4"
+              src="@/assets/text-logo.png"
+              alt="logo"
+            />
           </router-link>
         </v-col>
         <v-btn
@@ -62,16 +66,16 @@
                   :class="highlightTitle[item.title] ? 'gin-bg' : ''"
                 >
                   <template v-slot:activator class="menu-list-item">
-                    <v-list-item
-                      class="item-title"
-                      v-model="item.active"
-                      :class="
-                        highlightTitle[item.title] ? 'highlight-title' : ''
-                      "
-                    >
-                      <v-list-item-content>
-                        <v-list-item-title>
-                          <router-link :to="item.path">
+                    <router-link :to="item.path">
+                      <v-list-item
+                        class="item-title"
+                        v-model="item.active"
+                        :class="
+                          highlightTitle[item.title] ? 'highlight-title' : ''
+                        "
+                      >
+                        <v-list-item-content>
+                          <v-list-item-title>
                             <span class="menu-icon">
                               <font-awesome-icon
                                 class
@@ -81,10 +85,10 @@
                             <span class="item-title">
                               {{ item.title }}
                             </span>
-                          </router-link>
-                        </v-list-item-title>
-                      </v-list-item-content>
-                    </v-list-item>
+                          </v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </router-link>
                   </template>
                 </v-list-group>
               </div>
@@ -234,7 +238,7 @@ export default {
         },
         {
           icon: "money-check-alt",
-          title: "token",
+          title: "Api Token",
           path: "/token",
           exact: true,
           showInSidebar: true,

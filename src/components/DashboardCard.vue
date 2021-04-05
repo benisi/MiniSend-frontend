@@ -6,24 +6,8 @@
     >
       <v-row class="w-100 my-4 p-0">
         <v-col
-          cols="12"
-          :md="middleCardBreakingPointIcon"
-          class="d-flex justify-content-center align-items-center w-100"
-        >
-          <div
-            class="d-flex justify-content-center align-items-center icon-container p-3"
-            :class="theme"
-          >
-            <font-awesome-icon
-              class="item-icon"
-              :icon="icon"
-            ></font-awesome-icon>
-          </div>
-        </v-col>
-        <v-col
           class="card-widget w-100"
           cols="12"
-          :md="middleCardBreakingPointFigure"
         >
           <span class="figure">
             <ICountUp
@@ -105,8 +89,6 @@ export default {
   data() {
     return {
       cardTheme: "alternate",
-      middleCardBreakingPointIcon: 4,
-      middleCardBreakingPointFigure: 8,
       countUpOptions: {
         useEasing: true,
         useGrouping: true,
@@ -117,25 +99,9 @@ export default {
       },
     };
   },
-  mounted() {
-    window.addEventListener("resize", this.onResize);
-    this.onResize();
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onResize);
-  },
   methods: {
     onReady(instance, CountUp) {
       instance.update(0 + this.figure);
-    },
-    onResize() {
-      if (window.innerWidth > 1200 && window.innerWidth < 1629) {
-        this.middleCardBreakingPointIcon = 12;
-        this.middleCardBreakingPointFigure = 12;
-      } else {
-        this.middleCardBreakingPointIcon = 4;
-        this.middleCardBreakingPointFigure = 8;
-      }
     },
   },
 };
@@ -145,7 +111,6 @@ export default {
 @import "@/styles/_variables.scss";
 .divider {
   color: $mystic;
-  padding: 0 !important;
 }
 
 .icon-green {
@@ -299,4 +264,11 @@ export default {
     background-color: $light-purple !important;
   }
 }
+
+ .v-card span.figure {
+    text-align: center !important;
+  }
+  .v-card .title {
+    text-align: center;
+  }
 </style>
