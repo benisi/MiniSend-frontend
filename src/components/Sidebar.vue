@@ -173,25 +173,11 @@ export default {
       }
 
       for (const menu in this.menuList) {
-        if (this.menuList[menu].hasOwnProperty("items")) {
-          for (const matched in this.menuList[menu]["items"]) {
-            if (
-              this.menuList[menu]["items"][matched].path == matchedPath ||
-              matchedPath.includes(this.menuList[menu]["items"][matched].path)
-            ) {
-              this.menuList[menu].active = true;
-              this.highlightTitle = {};
-              this.highlightTitle[this.menuList[menu].title] = true;
-              return;
-            }
-          }
-        } else {
-          if (matchedPath.includes(this.menuList[menu].path)) {
-            this.menuList[menu].active = true;
-            this.highlightTitle = {};
-            this.highlightTitle[this.menuList[menu].title] = true;
-            return;
-          }
+        if (matchedPath.includes(this.menuList[menu].path)) {
+          this.menuList[menu].active = true;
+          this.highlightTitle = {};
+          this.highlightTitle[this.menuList[menu].title] = true;
+          return;
         }
       }
     },
@@ -230,14 +216,14 @@ export default {
           showInSidebar: true,
         },
         {
-          icon: "layer-group",
+          icon: "envelope",
           title: "Mails",
           path: "/mails",
           exact: true,
           showInSidebar: true,
         },
         {
-          icon: "money-check-alt",
+          icon: "key",
           title: "Api Token",
           path: "/token",
           exact: true,
@@ -265,16 +251,6 @@ export default {
     width: 100%;
     height: 100%;
   }
-
-  .septa {
-    margin-top: 18px;
-    color: $red;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 0.06px;
-    line-height: 24px;
-    width: 62.13px;
-  }
 }
 .menu-list {
   @media only screen and (max-width: 1199px) {
@@ -298,61 +274,7 @@ export default {
     line-height: 20px;
   }
 }
-.location-mobile {
-  font-size: 10px;
-  letter-spacing: 0.03px;
-  line-height: 14px;
-  padding: 7px 18px 7px 24px;
-}
-.location-info {
-  height: 60px;
-}
-.v-avatar.v-list-item__avatar.location-icon {
-  margin: 0;
-  height: unset !important;
-  min-width: unset !important;
-  width: 30px !important;
-  display: inline-block;
-  border-radius: unset;
 
-  .svg-inline--fa.fa-w-20 {
-    align-content: center;
-    color: $mulled-wine;
-    height: 12px !important;
-    min-width: unset !important;
-    width: 15px !important;
-  }
-}
-.location-info.v-list-item.theme--light {
-  .v-list-item__icon {
-    margin: 0;
-    padding: 22px 0;
-
-    .svg-inline--fa {
-      height: 12px;
-      width: 12px;
-      color: $mulled-wine;
-    }
-  }
-}
-.location-info .title.location-name {
-  color: $mulled-wine;
-  font-size: 14px !important;
-  letter-spacing: 0.03px !important;
-  line-height: 14px !important;
-  color: #48446f;
-}
-.theme--light.v-list-item .v-list-item__subtitle.location-address {
-  margin-top: 5px;
-  color: $amethyst-smoke;
-  font-size: 12px !important;
-  letter-spacing: 0.02px !important;
-  line-height: 11px !important;
-}
-hr.location-info-divider {
-  border-top: 2px solid $concrete;
-  margin-top: 0;
-}
 .menu-icon {
   width: 30px;
   display: inline-block;
@@ -377,13 +299,7 @@ hr.location-info-divider {
   > .v-list-item {
   padding-left: 58px;
 }
-.location-list {
-  position: relative;
-}
-.show-locations {
-  position: absolute;
-  left: 400px;
-}
+
 .user-info-mobile {
   min-height: 100px;
   background-color: $mariner;
@@ -395,13 +311,6 @@ hr.location-info-divider {
     font-weight: 600;
     letter-spacing: 0.04px;
     line-height: 20px;
-  }
-  .company-name {
-    color: #fff;
-    font-size: 12px;
-    font-weight: 300;
-    letter-spacing: 0.03px;
-    line-height: 17px;
   }
 }
 .rounded-letter {

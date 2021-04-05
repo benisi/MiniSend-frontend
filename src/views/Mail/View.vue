@@ -4,11 +4,13 @@
     <v-card class="mx-auto px-8 py-4" v-if="!loading">
       <v-card-text>
         <p class="display-1 text--primary">{{ mail.subject }}</p>
-        <p class="faint  my-0">
+        <p class="faint my-0">
           From: {{ mail.sender_email }}&#60;{{ mail.sender_name }}&#62;
         </p>
         <p class="faint my-0">To: {{ mail.email }}&#60;{{ mail.name }}&#62;</p>
-        <p class="faint  my-0 mb-4">Date: {{ mail.created_at | dateTimeFilter }}</p>
+        <p class="faint my-0 mb-4">
+          Date: {{ mail.created_at | dateTimeFilter }}
+        </p>
         <hr />
         <div class="text--primary mt-8" v-if="mail.text">
           {{ mail.text }}
@@ -20,6 +22,21 @@
         ></div>
       </v-card-text>
     </v-card>
+    <div v-if="attachmentData">
+      <span
+        v-for="attachment in attachmentData"
+        :key="attachment.filename"
+        class="ml-4 mt-4 px-4 py-4 attachment"
+      >
+        <font-awesome-icon
+            icon="paperclip"
+            class="mr-4"
+          ></font-awesome-icon>
+        <a :href="`data:${attachment.content}`" target="_blank">{{
+          attachment.filename
+        }}</a>
+      </span>
+    </div>
     <v-progress-circular
       :size="50"
       class="loader"
@@ -69,6 +86,12 @@ export default {
     mail() {
       return this.$store.getters["mails/getSingle"];
     },
+    attachmentData() {
+      if (this.mail && this.mail.attachments) {
+        return JSON.parse(this.mail.attachments);
+      }
+      return null;
+    },
   },
   methods: {},
 };
@@ -84,5 +107,9 @@ export default {
 }
 .faint {
   color: rgb(0 0 0 / 50%);
+}
+
+.attachment {
+  display: inline-block;
 }
 </style>

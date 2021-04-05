@@ -4,12 +4,12 @@
       <div class="col-md-4 offset-md-4">
         <v-row>
           <v-col cols="12">
-            <img src="" class="col-6 offset-3" />
+            <img src="@/assets/text-logo.png" class="col-6 offset-3" />
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12">
-            <v-card class="login py-4">
+            <v-card class="py-8">
               <v-row>
                 <v-col cols="10" offset="1">
                   <v-form
@@ -161,4 +161,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/_variables.scss";
+
+.register-btn {
+  background-color: $mariner2 !important;
+  color: $white;
+  width: 100%;
+}
 </style>

@@ -9,6 +9,7 @@ import RecipientMails from "../views/Mail/RecipientEmails.vue";
 import BatchList from "../views/Mail/BatchList.vue";
 import BatchMail from "../views/Mail/BatchMail.vue";
 import TokenList from "../views/Token/index.vue";
+import NotFoundPage from "../views/NotFoundPage.vue";
 import store from "@/store";
 
 Vue.use(VueRouter);
@@ -18,11 +19,19 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      requiresAuth: false,
+      title: "Login",
+    },
   },
   {
     path: "/register",
     name: "Register",
     component: Register,
+    meta: {
+      requiresAuth: false,
+      title: "Register",
+    },
   },
   {
     path: "/dashboard",
@@ -94,6 +103,15 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: "Token",
+    },
+  },
+  {
+    path: "*",
+    name: "Token",
+    component: NotFoundPage,
+    meta: {
+      requiresAuth: false,
+      title: "Page not found",
     },
   },
 ];

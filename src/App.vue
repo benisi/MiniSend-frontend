@@ -41,6 +41,11 @@ export default {
       user: "auth/getUser",
     }),
   },
+  watch: {
+    $route(to, from) {
+      document.title = `${to.meta.title} - MiniSend` || "MiniSent";
+    },
+  },
 };
 </script>
 
