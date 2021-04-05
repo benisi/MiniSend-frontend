@@ -10,7 +10,12 @@
       <v-spacer></v-spacer>
       <div class="hide-on-desktop">
         <router-link to="/">
-          <img class="img-fluid mobile-logo" src="@/assets/text-logo.png" alt="logo" to="/" />
+          <img
+            class="img-fluid mobile-logo"
+            src="@/assets/text-logo.png"
+            alt="logo"
+            to="/"
+          />
         </router-link>
       </div>
 

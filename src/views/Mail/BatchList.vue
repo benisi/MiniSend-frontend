@@ -60,7 +60,7 @@ export default {
         { text: "Mail Posted", value: "recipient_count" },
         { text: "Pending Mail", value: "pending_mail" },
         { text: "Date Created", value: "created_at" },
-         { text: "", value: "action", sortable: false },
+        { text: "", value: "action", sortable: false },
       ],
       breadcrumbs: [
         {
