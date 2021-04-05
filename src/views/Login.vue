@@ -4,12 +4,12 @@
       <div class="col-md-4 offset-md-4">
         <v-row>
           <v-col cols="12">
-            <img src="" class="col-6 offset-3" />
+            <img src="@/assets/text-logo.png" class="col-6 offset-3" />
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12">
-            <v-card class="login py-4">
+            <v-card class="login py-8">
               <v-row>
                 <v-col cols="10" offset="1">
                   <v-form
@@ -17,7 +17,7 @@
                     v-model="isFormValid"
                     @submit.prevent="login"
                   >
-                    <h4 class="pb-5">Please login to MiniSend</h4>
+                    <h4 class="pb-5">Login to Minisend</h4>
                     <v-text-field
                       v-model="email"
                       label="Email Address"
@@ -40,10 +40,8 @@
                     >
                   </v-form>
                 </v-col>
-                <v-col cols="10" offset="1" class="forgot-password">
-                  <router-link to="/forgot-password"
-                    >Forgot Password</router-link
-                  >
+                <v-col cols="10" offset="1" class="register">
+                  <router-link to="/register">Register</router-link>
                 </v-col>
               </v-row>
             </v-card>
@@ -138,17 +136,16 @@ export default {
 }
 
 .login-form {
-  margin-top: 20vh;
+  margin-top: 15vh;
   @media screen and (max-width: 600px) {
     margin-top: 5vh;
   }
 }
 
-.forgot-password {
+.register {
   text-align: center;
 
   a {
-    color: $vida-loca;
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;

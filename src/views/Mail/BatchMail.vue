@@ -23,7 +23,6 @@
       <v-data-table
         :items="mails"
         :headers="headers"
-        class="elevation-1"
         :items-per-page="50"
         :options.sync="options"
         :server-items-length="pagination.total"
@@ -34,28 +33,9 @@
         :loading="loading"
       >
         <template v-slot:[`item.subject`]="{ item }">
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <router-link :to="`/mails/${item.id}`">
-                <span v-bind="attrs" v-on="on">
-                  {{ textTruncate(item.subject) }}
-                </span>
-              </router-link>
-            </template>
-            <span>click to view email details</span>
-          </v-tooltip>
-        </template>
-        <template v-slot:[`item.email`]="{ item }">
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <router-link :to="`/mails/${item.email}`">
-                <span v-bind="attrs" v-on="on">
-                  {{ item.email }}
-                </span>
-              </router-link>
-            </template>
-            <span>click to view a list of {{ item.email }} mails</span>
-          </v-tooltip>
+          <router-link :to="`/mails/${item.id}`">
+            {{ item.subject }}
+          </router-link>
         </template>
         <template v-slot:[`item.created_at`]="{ item }">
           {{ item.created_at | dateTimeFilter }}
@@ -69,7 +49,6 @@
 </template>
 <script>
 import _ from "lodash";
-import { textTruncate } from "@/store/helpers";
 
 export default {
   data() {
@@ -77,6 +56,7 @@ export default {
       options: {},
       loading: false,
       search: "",
+      recipient: "",
       headers: [
         { text: "Subject", value: "subject", sortable: false },
         {
@@ -91,14 +71,21 @@ export default {
       ],
       breadcrumbs: [
         {
-          text: "Mails",
+          text: "Batch",
+          disabled: false,
+          href: "/batches",
+        },
+        {
+          text: "view",
           disabled: true,
-          href: "",
+          href: "/mails",
         },
       ],
     };
   },
   created() {
+    this.batchId = this.$route.params.batchId;
+    this.breadcrumbs[1].text = this.batchId;
     this.fetchMails();
   },
   computed: {
@@ -119,10 +106,12 @@ export default {
     },
   },
   methods: {
-    textTruncate(text) {
-      return textTruncate(text, 20);
-    },
     fetchMails(filters = {}) {
+      if (!filters.filters) {
+        filters.filters = {};
+      }
+
+      filters.filters.batch_id = this.batchId;
       this.loading = true;
       this.$store
         .dispatch("mails/fetchList", filters)

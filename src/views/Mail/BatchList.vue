@@ -4,26 +4,22 @@
     <v-card>
       <v-row>
         <v-col md="8" class="float-left pb-0 mx-4">
-          <v-text-field
-            label="Search sender, recipient and subject"
-            v-model="search"
-          ></v-text-field>
+          <v-text-field label="Search sender" v-model="search"></v-text-field>
         </v-col>
       </v-row>
       <v-row class="table-header pr-3 m-0">
         <v-col md="8" class="float-left pb-0">
           <h4 class="my-3 mx-4">
             Showing
-            {{ recordsStartToEndString }} Mail{{
+            {{ recordsStartToEndString }} Mail Batch{{
               pagination.total === 1 ? "" : "s"
             }}
           </h4>
         </v-col>
       </v-row>
       <v-data-table
-        :items="mails"
+        :items="batch"
         :headers="headers"
-        class="elevation-1"
         :items-per-page="50"
         :options.sync="options"
         :server-items-length="pagination.total"
@@ -33,29 +29,10 @@
         }"
         :loading="loading"
       >
-        <template v-slot:[`item.subject`]="{ item }">
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <router-link :to="`/mails/${item.id}`">
-                <span v-bind="attrs" v-on="on">
-                  {{ textTruncate(item.subject) }}
-                </span>
-              </router-link>
-            </template>
-            <span>click to view email details</span>
-          </v-tooltip>
-        </template>
-        <template v-slot:[`item.email`]="{ item }">
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <router-link :to="`/mails/${item.email}`">
-                <span v-bind="attrs" v-on="on">
-                  {{ item.email }}
-                </span>
-              </router-link>
-            </template>
-            <span>click to view a list of {{ item.email }} mails</span>
-          </v-tooltip>
+        <template v-slot:[`item.action`]="{ item }">
+          <router-link :to="`/batches/${item.id}`">
+            view mails on this batch
+          </router-link>
         </template>
         <template v-slot:[`item.created_at`]="{ item }">
           {{ item.created_at | dateTimeFilter }}
@@ -69,7 +46,6 @@
 </template>
 <script>
 import _ from "lodash";
-import { textTruncate } from "@/store/helpers";
 
 export default {
   data() {
@@ -78,20 +54,17 @@ export default {
       loading: false,
       search: "",
       headers: [
-        { text: "Subject", value: "subject", sortable: false },
-        {
-          text: "Recipient Email",
-          value: "email",
-        },
-        { text: "Recipient Name", value: "name", sortable: false },
         { text: "Sender Email", value: "sender_email" },
         { text: "Sender Name", value: "sender_name" },
         { text: "Status", value: "status" },
+        { text: "Mail Posted", value: "recipient_count" },
+        { text: "Pending Mail", value: "pending_mail" },
         { text: "Date Created", value: "created_at" },
+         { text: "", value: "action", sortable: false },
       ],
       breadcrumbs: [
         {
-          text: "Mails",
+          text: "Batch",
           disabled: true,
           href: "",
         },
@@ -99,11 +72,11 @@ export default {
     };
   },
   created() {
-    this.fetchMails();
+    this.fetchBatch();
   },
   computed: {
-    mails() {
-      return this.$store.getters["mails/get"];
+    batch() {
+      return this.$store.getters["mails/getBatch"];
     },
     pagination() {
       return this.$store.getters["mails/pagination"];
@@ -119,13 +92,10 @@ export default {
     },
   },
   methods: {
-    textTruncate(text) {
-      return textTruncate(text, 20);
-    },
-    fetchMails(filters = {}) {
+    fetchBatch(filters = {}) {
       this.loading = true;
       this.$store
-        .dispatch("mails/fetchList", filters)
+        .dispatch("mails/fetchBatchList", filters)
         .then(() => {
           this.loading = false;
         })
@@ -151,7 +121,7 @@ export default {
       if (this.search && this.search.trim().length > 0) {
         filterOptions.search = this.search.trim();
       }
-      this.fetchMails(filterOptions);
+      this.fetchBatch(filterOptions);
     },
     syncOptions(options) {
       this.options = options;
@@ -165,7 +135,7 @@ export default {
         page_size: this.options.itemsPerPage,
         search: this.search,
       };
-      this.fetchMails(filterOptions);
+      this.fetchBatch(filterOptions);
     }, 300),
   },
 };
