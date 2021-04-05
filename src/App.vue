@@ -7,6 +7,7 @@
         :duration="10000"
       />
       <div class="container-fluid px-0">
+        <FullScreenLoader :status="showLoader" :message="loaderMessage" />
         <div v-if="!!token" class="full-view">
           <Header />
           <Sidebar />
@@ -26,14 +27,30 @@
 import Sidebar from "@/components/Sidebar.vue";
 import Header from "@/components/Header.vue";
 import { mapGetters } from "vuex";
+import FullScreenLoader from "@/components/FullScreenLoader.vue";
+import { eventBus } from "@/eventBus";
 
 export default {
   components: {
     Sidebar,
     Header,
+    FullScreenLoader,
   },
   data() {
-    return {};
+    return {
+      showLoader: false,
+      loaderMessage: "",
+    };
+  },
+  created() {
+    eventBus.$on("show-loader", (message) => {
+      this.showLoader = true;
+      this.loaderMessage = message;
+    });
+    eventBus.$on("hide-loader", () => {
+      this.showLoader = false;
+      this.loaderMessage = "";
+    });
   },
   computed: {
     ...mapGetters({
