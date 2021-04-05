@@ -24,7 +24,7 @@ import {
   faKey,
   faThLarge,
   faCircle,
-  faPaperclip
+  faPaperclip,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 

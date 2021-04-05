@@ -5,10 +5,7 @@
       :class="`${cardTheme}-${theme}`"
     >
       <v-row class="w-100 my-4 p-0">
-        <v-col
-          class="card-widget w-100"
-          cols="12"
-        >
+        <v-col class="card-widget w-100" cols="12">
           <span class="figure">
             <ICountUp
               :endVal="figure"
@@ -265,10 +262,10 @@ export default {
   }
 }
 
- .v-card span.figure {
-    text-align: center !important;
-  }
-  .v-card .title {
-    text-align: center;
-  }
+.v-card span.figure {
+  text-align: center !important;
+}
+.v-card .title {
+  text-align: center;
+}
 </style>

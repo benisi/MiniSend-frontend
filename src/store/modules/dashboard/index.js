@@ -11,7 +11,7 @@ const getters = {
 const mutations = {
   setMail(state, payload) {
     state.mail = payload;
-  }
+  },
 };
 
 const actions = {
