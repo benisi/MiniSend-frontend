@@ -18,7 +18,7 @@
         <div
           class="text--primary mt-8"
           v-if="mail.html"
-          v-html="mail.html"
+          v-html="scriptStrippedHtml"
         ></div>
       </v-card-text>
     </v-card>
@@ -95,6 +95,20 @@ export default {
     attachmentData() {
       if (this.mail && this.mail.attachments) {
         return JSON.parse(this.mail.attachments);
+      }
+      return null;
+    },
+    scriptStrippedHtml() {
+      const html = this.mail.html;
+      if (html) {
+        const div = document.createElement("div");
+        div.innerHTML = html;
+        const scripts = div.getElementsByTagName("script");
+        let scriptCount = scripts.length;
+        while (scriptCount--) {
+          scripts[scriptCount].parentNode.removeChild(scripts[scriptCount]);
+        }
+        return div.innerHTML;
       }
       return null;
     },

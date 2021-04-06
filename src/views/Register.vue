@@ -115,7 +115,7 @@ export default {
           name: this.fullName,
         });
         if (response && response.data) {
-           eventBus.$emit("hide-loader");
+          eventBus.$emit("hide-loader");
           if (response.data.data.token) {
             this.$notify({
               group: "notification",
