@@ -55,6 +55,7 @@
 </template>
 <script>
 import _ from "lodash";
+import stripJs from "strip-js";
 
 export default {
   data() {
@@ -101,14 +102,7 @@ export default {
     scriptStrippedHtml() {
       const html = this.mail.html;
       if (html) {
-        const div = document.createElement("div");
-        div.innerHTML = html;
-        const scripts = div.getElementsByTagName("script");
-        let scriptCount = scripts.length;
-        while (scriptCount--) {
-          scripts[scriptCount].parentNode.removeChild(scripts[scriptCount]);
-        }
-        return div.innerHTML;
+        return stripJs(html);
       }
       return null;
     },
